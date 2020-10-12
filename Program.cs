@@ -7,6 +7,8 @@ namespace TicTacToe
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Tik Tak Toe program!");
+            TicTacToe ticTacToe = new TicTacToe();
+            ticTacToe.CreateBoard();
         }
     }
 }
