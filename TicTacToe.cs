@@ -48,7 +48,6 @@ namespace TicTacToe
             {
                 return choice;
             }
-
             PlayerChoice();
             return ' ';
         }
@@ -105,12 +104,14 @@ namespace TicTacToe
                     (board[1] == playerLetter && board[5] == playerLetter && board[9] == playerLetter) ||
                     (board[3] == playerLetter && board[6] == playerLetter && board[9] == playerLetter) ||
                     (board[3] == playerLetter && board[5] == playerLetter && board[7] == playerLetter) ||
-                    (board[7] == playerLetter && board[8] == playerLetter && board[9] == playerLetter)
+                    (board[7] == playerLetter && board[8] == playerLetter && board[9] == playerLetter) ||
+                    (board[4] == playerLetter && board[5] == playerLetter && board[6] == playerLetter) ||
+                    (board[2] == playerLetter && board[5] == playerLetter && board[8] == playerLetter)
                    );
         }
         public bool CheckDraw()
         {
-            for (int i = 0; i <= 9; i++)
+            for (int i = 1; i <= 9; i++)
             {
                 if (isSpaceFree(i) == true)
                     return false;
@@ -128,7 +129,7 @@ namespace TicTacToe
             int[] cornerMoves = { 1, 3, 7, 9 };
             for (int i = 0; i < cornerMoves.Length; i++)
             {
-                if (isSpaceFree(i))
+                if (isSpaceFree(cornerMoves[i]))
                     return cornerMoves[i];
             }
             if (isSpaceFree(5))
@@ -136,21 +137,21 @@ namespace TicTacToe
             int[] sideMoves = { 2, 4, 6, 8 };
             for (int i = 0; i < sideMoves.Length; i++)
             {
-                if (isSpaceFree(i))
+                if (isSpaceFree(sideMoves[i]))
                     return sideMoves[i];
             }
 
             return 0;
 
         }
-        public int GetWinningMove(char computerLetter)
+        public int GetWinningMove(char letter)
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 1; i < 10; i++)
             {
                 if (isSpaceFree(i))
                 {
-                    MakeAMove(i, computerLetter);
-                    if (CheckWinner(computerLetter))
+                    MakeAMove(i, letter);
+                    if (CheckWinner(letter))
                     {
                         board[i] = ' ';
                         return i;
@@ -159,6 +160,15 @@ namespace TicTacToe
                 }
             }
             return 0;
+        }
+        public int getGameStatus(char letter)
+        {
+            if (CheckWinner(letter))
+                return 0;
+            if (CheckDraw())
+                return 1;
+            return 2;
+
         }
     }
 }
