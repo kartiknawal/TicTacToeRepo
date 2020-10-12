@@ -14,5 +14,19 @@ namespace TicTacToe
                 board[i] = ' ';
             }
         }
+
+        public char PlayerChoice()
+        {
+            char choice;
+            Console.WriteLine("Enter X or O");
+            choice = Convert.ToChar(Console.ReadLine());
+            if (choice == 'X' || choice == 'O')
+            {
+                return choice;
+            }
+
+            PlayerChoice();
+            return ' ';
+        }
     }
-}
+    }
