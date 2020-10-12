@@ -6,10 +6,23 @@ namespace TicTacToe
 {
     class TicTacToe
     {
+        public static int HEADS = 1;
+        public static int TAILS = 0;
         char[] board;
+
         public TicTacToe()
         {
             board = new char[10];
+        }
+        public string PlayerChance()
+        {
+            Random random = new Random();
+            int toss = random.Next(0, 2);
+            if (toss == HEADS)
+            {
+                return "USER";
+            }
+            return "COMPUTER";
         }
         public void CreateBoard()
         {
@@ -46,7 +59,6 @@ namespace TicTacToe
             {
                 Console.WriteLine("Location already filled");
                 MoveToLocation();
-
             }
             return location;
 
