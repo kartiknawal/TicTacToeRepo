@@ -39,7 +39,6 @@ namespace TicTacToe
                 board[i] = ' ';
             }
         }
-
         public char PlayerChoice()
         {
             char choice;
@@ -52,6 +51,12 @@ namespace TicTacToe
 
             PlayerChoice();
             return ' ';
+        }
+        public char getComputerLetter(char playerLetter)
+        {
+            if (playerLetter == 'X')
+                return 'O';
+            return 'X';
         }
         public int MoveToLocation()
         {
@@ -111,6 +116,26 @@ namespace TicTacToe
                     return false;
             }
             return true;
+        }
+        public int GetComputerMove(char computerLetter)
+        {
+            int winningMove = GetWinningMove(computerLetter);
+            return winningMove;
+        }
+        public int GetWinningMove(char computerLetter)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                if (isSpaceFree(i))
+                {
+                    MakeAMove(i, computerLetter);
+                    if (CheckWinner(computerLetter))
+                        return i;
+                    else
+                        board[i] = ' ';
+                }
+            }
+            return 0;
         }
     }
 }

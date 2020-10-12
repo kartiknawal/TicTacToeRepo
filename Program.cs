@@ -6,16 +6,26 @@ namespace TicTacToe
     {
         static void Main(string[] args)
         {
+            int location = 0;
             Console.WriteLine("Welcome to Tik Tak Toe program!");
             TicTacToe ticTacToe = new TicTacToe();
             ticTacToe.CreateBoard();
+            char playerLetter = ticTacToe.PlayerChoice();
+            char computerLetter = ticTacToe.getComputerLetter(playerLetter);
             string player = ticTacToe.PlayerStartingFirst();
             while (true)
             {
                 Console.WriteLine(player + " plays");
-                char playerLetter = ticTacToe.PlayerChoice();
-                int location = ticTacToe.MoveToLocation();
-                ticTacToe.MakeAMove(location, playerLetter);
+                if (player == "USER")
+                {
+                    location = ticTacToe.MoveToLocation();
+                    ticTacToe.MakeAMove(location, playerLetter);
+                }
+                if (player == "COMPUTER")
+                {
+                    location = ticTacToe.GetComputerMove(computerLetter);
+                    ticTacToe.MakeAMove(location, computerLetter);
+                }
                 ticTacToe.ShowBoard();
                 if (ticTacToe.CheckWinner(playerLetter) == true)
                 {
@@ -29,6 +39,7 @@ namespace TicTacToe
                 }
                 player = ticTacToe.PlayerChance(player);
             }
+
         }
     }
 }
