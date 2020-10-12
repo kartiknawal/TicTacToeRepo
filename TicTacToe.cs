@@ -32,24 +32,28 @@ namespace TicTacToe
             PlayerChoice();
             return ' ';
         }
-        public void MoveToLocation(char letter)
+        public int MoveToLocation()
         {
             Console.WriteLine("Enter Location index from 1 to 9");
             int location = Convert.ToInt32(Console.ReadLine());
             if (location < 1 || location > 9)
             {
                 Console.WriteLine("Not valid index");
-                MoveToLocation(letter);
+                MoveToLocation();
+
             }
-            else if (board[location] == ' ')
-            {
-                board[location] = letter;
-            }
-            else
+            if (board[location] != ' ')
             {
                 Console.WriteLine("Location already filled");
-                MoveToLocation(letter);
+                MoveToLocation();
+
             }
+            return location;
+
+        }
+        public void MakeAMove(int location, char letter)
+        {
+            board[location] = letter;
         }
         public void ShowBoard()
         {
