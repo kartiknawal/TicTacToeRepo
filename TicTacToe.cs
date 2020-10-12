@@ -87,7 +87,7 @@ namespace TicTacToe
         }
         public void ShowBoard()
         {
-            int i, j;
+            int i;
             for (i = 1; i < 10; i++)
             {
                 if (i == 4 || i == 7)
@@ -120,7 +120,10 @@ namespace TicTacToe
         public int GetComputerMove(char computerLetter)
         {
             int winningMove = GetWinningMove(computerLetter);
-            return winningMove;
+            if (winningMove != 0)
+                return winningMove;
+            return 0;
+
         }
         public int GetWinningMove(char computerLetter)
         {
