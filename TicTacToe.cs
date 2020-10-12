@@ -87,7 +87,7 @@ namespace TicTacToe
         }
         public void ShowBoard()
         {
-            int i;
+            int i, j;
             for (i = 1; i < 10; i++)
             {
                 if (i == 4 || i == 7)
@@ -117,11 +117,20 @@ namespace TicTacToe
             }
             return true;
         }
-        public int GetComputerMove(char computerLetter)
+        public int GetComputerMove(char computerLetter, char playerLetter)
         {
             int winningMove = GetWinningMove(computerLetter);
             if (winningMove != 0)
                 return winningMove;
+            int playerWinningMove = GetWinningMove(playerLetter);
+            if (playerWinningMove != 0)
+                return playerWinningMove;
+            int[] cornerMoves = { 1, 3, 7, 9 };
+            for (int i = 0; i < cornerMoves.Length; i++)
+            {
+                if (isSpaceFree(i))
+                    return cornerMoves[i];
+            }
             return 0;
 
         }
@@ -133,9 +142,11 @@ namespace TicTacToe
                 {
                     MakeAMove(i, computerLetter);
                     if (CheckWinner(computerLetter))
-                        return i;
-                    else
+                    {
                         board[i] = ' ';
+                        return i;
+                    }
+                    board[i] = ' ';
                 }
             }
             return 0;

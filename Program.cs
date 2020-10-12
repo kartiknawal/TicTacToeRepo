@@ -23,7 +23,7 @@ namespace TicTacToe
                 }
                 if (player == "COMPUTER")
                 {
-                    location = ticTacToe.GetComputerMove(computerLetter);
+                    location = ticTacToe.GetComputerMove(computerLetter, playerLetter);
                     ticTacToe.MakeAMove(location, computerLetter);
                 }
                 ticTacToe.ShowBoard();
@@ -39,6 +39,7 @@ namespace TicTacToe
                 }
                 player = ticTacToe.PlayerChance(player);
             }
+
 
         }
 
